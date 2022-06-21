@@ -5,15 +5,19 @@
             "type": "node",
             "request": "launch",
             "name": "Server",
+            "runtimeExecutable": "npm",
             "runtimeArgs": [
-                "--nolazy",
-                "-r",
-                "ts-node/register"
+                "run",
+                "start:dev",
+                "--",
+                "--inspect-brk"
             ],
+            "restart": true,
             "args": [
                 "${workspaceFolder}/src/main.ts"
             ],
-            "autoAttachChildProcesses": true
+            "autoAttachChildProcesses": true,
+            "cwd": "${workspaceRoot}"
         }
     ]
 }
