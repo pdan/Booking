@@ -24,6 +24,9 @@ let UserService = class UserService {
     async findAll() {
         return await this.userRepository.find();
     }
+    async findOne(email) {
+        return await this.userRepository.findOneBy({ email });
+    }
     async create(user) {
         return await this.userRepository.save(user);
     }

@@ -6,24 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.AuthenticationModule = void 0;
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("@nestjs/typeorm");
-const users_module_1 = require("./users/users.module");
-let AppModule = class AppModule {
+const user_service_1 = require("../user/user.service");
+const authentication_service_1 = require("./authentication.service");
+let AuthenticationModule = class AuthenticationModule {
 };
-AppModule = __decorate([
+AuthenticationModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'sqlite',
-                database: 'bookingDB',
-                entities: [__dirname + '/**/*.entity{.ts,.js}'],
-                synchronize: true,
-            }),
-            users_module_1.UsersModule
-        ]
+        imports: [user_service_1.UserService],
+        providers: [authentication_service_1.AuthenticationService],
     })
-], AppModule);
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+], AuthenticationModule);
+exports.AuthenticationModule = AuthenticationModule;
+//# sourceMappingURL=authentication.module.js.map
