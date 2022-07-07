@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserStatus } from './user.model';
 import { v4 as uuid } from 'uuid';
@@ -10,8 +10,26 @@ export class UsersService {
 
   private users: User[] = [];
 
+  getUser(id: string): User {
+    const user = this.users.find((user) => user.id === id);
+    if (!user) throw new NotFoundException(`Task with ID ${id} not found`);
+    return user;
+  }
+
   getUsers(filters: UsersFilterDto): User[] {
-    return this.users
+    if (filters.email)
+      return this.users.filter((user) => user.email === filters.email);
+    if (filters.phone)
+      return this.users.filter((user) => user.phone === filters.phone);
+    if (filters.lastName)
+      return this.users.filter((user) => user.lastName === filters.lastName);
+    if (filters.status)
+      return this.users.filter((user) => user.status === filters.status);
+    return this.users;
+  }
+
+  deleteUser(id: string) {
+    this.users = this.users.filter( u => u.id !== id)
   }
 
   createUser(createUserDto: CreateUserDto): User {
@@ -29,7 +47,5 @@ export class UsersService {
     return user;
   }
 
-  updateUser( ) {
-
-  }
+  updateUser() {}
 }

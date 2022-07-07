@@ -6,7 +6,7 @@ export declare class UsersController {
     private usersService;
     constructor(usersService: UsersService);
     getUsers(filterDto: UsersFilterDto): User[];
-    getUser(id: string): void;
+    getUser(id: string): User;
     deleteUser(id: string): void;
     createUser(createUserDto: CreateUserDto): User;
 }

@@ -17,8 +17,25 @@ let UsersService = class UsersService {
     constructor() {
         this.users = [];
     }
+    getUser(id) {
+        const user = this.users.find((user) => user.id === id);
+        if (!user)
+            throw new common_1.NotFoundException(`Task with ID ${id} not found`);
+        return user;
+    }
     getUsers(filters) {
+        if (filters.email)
+            return this.users.filter((user) => user.email === filters.email);
+        if (filters.phone)
+            return this.users.filter((user) => user.phone === filters.phone);
+        if (filters.lastName)
+            return this.users.filter((user) => user.lastName === filters.lastName);
+        if (filters.status)
+            return this.users.filter((user) => user.status === filters.status);
         return this.users;
+    }
+    deleteUser(id) {
+        this.users = this.users.filter(u => u.id !== id);
     }
     createUser(createUserDto) {
         const { firstName, lastName, email, phone, password } = createUserDto;
@@ -34,8 +51,7 @@ let UsersService = class UsersService {
         this.users.push(user);
         return user;
     }
-    updateUser() {
-    }
+    updateUser() { }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),

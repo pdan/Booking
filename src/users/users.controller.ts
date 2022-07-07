@@ -15,12 +15,12 @@ export class UsersController {
 
     @Get('/:id')
     getUser(@Param('id') id:string) {
-        
+        return this.usersService.getUser(id)
     }
 
     @Delete('/:id')
     deleteUser(@Param('id') id:string) {
-
+        return this.usersService.deleteUser(id)
     }
 
     @Post()

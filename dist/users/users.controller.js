@@ -25,8 +25,10 @@ let UsersController = class UsersController {
         return this.usersService.getUsers(filterDto);
     }
     getUser(id) {
+        return this.usersService.getUser(id);
     }
     deleteUser(id) {
+        return this.usersService.deleteUser(id);
     }
     createUser(createUserDto) {
         return this.usersService.createUser(createUserDto);
